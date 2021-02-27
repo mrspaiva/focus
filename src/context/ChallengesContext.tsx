@@ -1,10 +1,17 @@
 import { createContext, ReactNode, useState } from 'react'
 import challenges from '../challenges.json'
 
+interface Challenge {
+  type: string;
+  description: string;
+  amount: number;
+}
+
 interface ChallengesContextData {
   level: number;
   currentExperience: number;
   challengesCompleted: number;
+  activeChallenge: object;
   levelUp: () => void;
   startNewChallenge: () => void;
 }
@@ -39,6 +46,7 @@ export function ChallengesProvider({ children } : ChallengesProviderProps) {
       level,
       currentExperience,
       challengesCompleted,
+      activeChallenge,
       levelUp,
       startNewChallenge
     }}
