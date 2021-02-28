@@ -17,6 +17,7 @@ export default function ChallengeBox() {
             ) : (
               <img src="icons/eye.svg" alt=""/>
             ) }
+            
             <strong>Exercite-se</strong>
             <p>{activeChallenge.description}</p>
           </main>
