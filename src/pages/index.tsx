@@ -7,29 +7,47 @@ import CompletedChallenges from '../components/CompletedChallenges';
 import styles from '../styles/pages/Home.module.css';
 import Countdown from '../components/Countdown';
 import ChallengeBox from '../components/ChallengeBox';
+import { ChallengesProvider } from '../context/ChallengesContext';
+import { CountdownProvider } from '../context/CountdownContext';
 
-export default function Home(props) {
+interface HomeProps {
+  level: number;
+  currentExperience: number;
+  challengesCompleted: number;
+}
+
+export default function Home(props: HomeProps) {
   console.log(props)
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Home | Focus</title>
-      </Head>
+    <ChallengesProvider 
+    level={props.level} 
+    currentExperience={props.currentExperience} 
+    challengesCompleted={props.challengesCompleted}
+    >
 
-      <ExperienceBar />
+      <div className={styles.container}>
+        <Head>
+          <title>Home | Focus</title>
+        </Head>
 
-      <section>
-        <div>
-          <Profile />
-          <CompletedChallenges />
-          <Countdown />
-        </div>
-        <div>
-          <ChallengeBox />  
-        </div>
-      </section>
-    </div>
+        <ExperienceBar />
+
+        <CountdownProvider>
+          <section>
+            <div>
+              <Profile />
+              <CompletedChallenges />
+              <Countdown />
+            </div>
+            <div>
+              <ChallengeBox />  
+            </div>
+          </section>
+        </CountdownProvider>
+      </div>
+
+    </ChallengesProvider>
   )
 }
 
@@ -39,9 +57,9 @@ export const getServerSideProps: GetServerSideProps = async(ctx) => {
 
   return {
     props: { 
-      level, 
-      currentExperience, 
-      challengesCompleted 
+      level: Number(level),
+      currentExperience: Number(currentExperience), 
+      challengesCompleted: Number(challengesCompleted),
     }
   }
 }
