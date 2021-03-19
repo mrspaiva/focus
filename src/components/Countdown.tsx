@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { CoundownContext } from '../context/CoundownContext'
+import { CountdownContext } from '../context/CountdownContext'
 import styles from '../styles/components/Countdown.module.css'
 
 export default function Countdown() {
@@ -10,7 +10,7 @@ export default function Countdown() {
     hasFinished, 
     startCountdown, 
     resetCountdown, 
-  } = useContext(CoundownContext)
+  } = useContext(CountdownContext)
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('')
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('')
