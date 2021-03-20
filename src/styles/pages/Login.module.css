@@ -1,0 +1,71 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: var(--blue);
+
+  display: flex;
+  align-items: center;
+}
+
+.container .symbol {
+  width: 38rem;
+  height: 38rem;
+}
+
+.container main {
+  color: var(--white);
+  margin-left: 8rem;
+  margin-bottom: 1rem;
+}
+
+.container main h1 {
+  margin-bottom: 1.5rem;
+}
+
+main .loginContent {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  color: var(--text-highlight)
+}
+
+.loginContent img {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 1.2rem;
+}
+
+.loginContent p {
+  width: 13rem;
+  line-height: 1.7rem;
+}
+
+main .inputContent {
+  display: flex;
+}
+
+main .inputText {
+  width: 20rem;
+  height: 4rem;
+  padding: 1rem;
+  border: 0;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background: linear-gradient(90deg, #4953B8 20%, #5965e0 100%);
+  color: var(--white);
+}
+
+main .inputButton {
+  width: 4rem;
+  height: 4rem;
+  border: 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+  background: var(--blue-dark);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
