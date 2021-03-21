@@ -1,65 +1,48 @@
-import Head from 'next/head'
-import { GetServerSideProps } from 'next'
+import { useRouter } from 'next/router'
+import { useRef, useState } from 'react'
+import styles from '../styles/pages/Login.module.css'
 
-import { ExperienceBar } from "../components/ExperienceBar";
-import Profile from '../components/Profile';
-import CompletedChallenges from '../components/CompletedChallenges';
-import styles from '../styles/pages/Home.module.css';
-import Countdown from '../components/Countdown';
-import ChallengeBox from '../components/ChallengeBox';
-import { ChallengesProvider } from '../context/ChallengesContext';
-import { CountdownProvider } from '../context/CountdownContext';
+export default function login() {
+  const inputRef = useRef<HTMLInputElement>(null)
 
-interface HomeProps {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
+  const { push } = useRouter()
+  const [username, setUsername] = useState('')
 
-export default function Home(props: HomeProps) {
-  console.log(props)
 
-  return (
-    <ChallengesProvider 
-    level={props.level} 
-    currentExperience={props.currentExperience} 
-    challengesCompleted={props.challengesCompleted}
-    >
-
-      <div className={styles.container}>
-        <Head>
-          <title>Home | Focus</title>
-        </Head>
-
-        <ExperienceBar />
-
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox />  
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-
-    </ChallengesProvider>
-  )
-}
-
-export const getServerSideProps: GetServerSideProps = async(ctx) => {
-
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
-
-  return {
-    props: { 
-      level: Number(level),
-      currentExperience: Number(currentExperience), 
-      challengesCompleted: Number(challengesCompleted),
-    }
+  function handleSubmit(e) {
+    e.preventDefault()
+    { username && push(`/${username}`) }
   }
+  return (
+    <div className={styles.container}>
+        <img className={styles.symbol} src="simbolo.svg" alt=""/>
+        
+        <main>
+          <h1>Bem-vindo ao Focus</h1>
+
+          <section className={styles.loginContent}>
+            <img src="icons/github.svg" alt=""/>
+            <p>Faça login com seu Github para começar</p>
+          </section>
+
+          <form 
+          className={styles.inputContent}
+          onSubmit={handleSubmit}
+          >
+            <input 
+            className={styles.inputText} 
+            type="text" 
+            placeholder="Digite seu username"
+            onChange={e => setUsername(e.target.value)}
+            ref={inputRef}
+            />
+
+            <button type="submit" className={styles.inputButton}>
+              <img src="icons/arrow-right.svg" alt=""/>
+            </button>
+          </form>
+
+        </main>
+    </div>
+  )
 }
